@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventosComponent implements OnInit {
 
-  public envetos: any;
+  public eventos: any;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -17,10 +17,10 @@ export class EventosComponent implements OnInit {
 
   public getEventos(): void {
     this.http.get("https://localhost:5001/api/eventos").subscribe(
-      response => this.envetos = response,
+      response => this.eventos = response,
       error => console.log(error),
     );
-    this.envetos = [
+    this.eventos = [
       {
       Tema: 'Angular',
       Local: "SP"
