@@ -2,40 +2,47 @@
 <h1>Eventos</h1>
 <hr>
 
-<form action="">
+<div>
     <div class="row">
       <div class="col">
-       <input type="text" class="form-control" placeholder="Pesquise">
-      </div>
-      <div class="col">
-       <button type="button" class="btn btn-outline-success">Buscar</button>
+        <label class="mr-2">Filtro: </label>
+       <input type="text" class="form-control" placeholder="Pesquise" [(ngModel)]="filtrolista" >
       </div>
    </div>
-</form>
+
+</div>
+
 
 <div>
   <table  class="table table-striped">
     <thead>
       <tr>
         <th>#</th>
-        <th>Imagem</th>
+        <th><button class="btn btn-outline-btn-primary btn-sm" (click)="alterarImagem()" >{{!mostrarImagem ? "Exibir" : "Ocultar"}}</button></th>
         <th>Local</th>
         <th>Lote</th>
         <th>Qtd Pessoas</th>
+        <th>Tema</th>
         <th>Opção</th>
       </tr>
     </thead>
-    <tbody *ngIf="eventos && eventos.length > 0">
-      <tr *ngFor="let evento of eventos">
+
+    <tbody *ngIf="eventosFiltados && eventosFiltados.length > 0">
+      <tr *ngFor="let evento of eventosFiltados">
+        <td> <img [collapse]="!mostrarImagem" [isAnimated]="true" [style.width.px]="larguraImg" [style.height.px]="alturaImg" src="/assets/{{evento.imagemURL}}" ></td>
         <th>{{ evento.eventoId }}</th>
-        <td> <img [style.width.px]="widthImg" [style.height.px]="heightImg" src="/assets/{{evento.imagemURL}}" ></td>
         <td>{{ evento.local }}</td>
         <td>{{ evento.lote }}</td>
         <td>{{ evento.qtdPessoas }}</td>
-        <td></td>
+
+        <th>{{ evento.tema }}</th>
+        <td>
+          <button type="button" class="btn btn-primary btn-sm mr-2">Primary</button>
+          <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+        </td>
       </tr>
     </tbody>
-    <tfoot *ngIf="!eventos.length">
+    <tfoot *ngIf="!eventosFiltados.length">
       <tfoot  class="text-center">
         <td colspan="8">
           <h4>Nenhum evento encontrados</h4>
