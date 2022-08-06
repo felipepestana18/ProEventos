@@ -1,0 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using ProEventos.Domain;
+
+namespace ProEventos.Persistence
+{
+    public class ProEventosContext : DbContext
+    {
+        
+    public ProEventosContext(DbContextOptions<ProEventosContext> options) : base(options) {}
+     public DbSet<Evento> Eventos { get; set; }
+    public DbSet<Lote> Lotes { get; set; }
+    public DbSet<Palestrante> Palestrantes { get; set; }
+    public DbSet<PalestranteEvento> PalestranteEventos { get; set; }
+    public DbSet<RedeSocial> RedeSociais { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder) 
+    {
+        // NECESSARIO PARA QUANDO CRIAR O BANCO JÁF FAZER A LIGAÇÃO DA CHAVE PRIMARY
+        modelBuilder.Entity<PalestranteEvento>().HasKey(PE => new {PE.EventoId, PE.PalestranteId});
+    }
+     
+     
+    }
+}
