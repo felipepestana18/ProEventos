@@ -17,8 +17,9 @@ namespace ProEventos.Persistence.Contextos
     {
         // NECESSARIO PARA QUANDO CRIAR O BANCO JÁF FAZER A LIGAÇÃO DA CHAVE PRIMARY
         modelBuilder.Entity<PalestranteEvento>().HasKey(PE => new {PE.EventoId, PE.PalestranteId});
-    }
-     
-     
+
+        modelBuilder.Entity<Evento>().HasMany(e => e.RedeSociais).WithOne(rs => rs.Evento).OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Palestrante>().HasMany(e => e.RedeSociais).WithOne(rs => rs.Palestrante).OnDelete(DeleteBehavior.Cascade);
+    }     
     }
 }

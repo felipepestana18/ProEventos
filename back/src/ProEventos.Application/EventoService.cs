@@ -10,7 +10,6 @@ namespace ProEventos.Application
     {
         private readonly IGeralPersist _geralPersist;
         private readonly IEventoPersist _eventoPersist;
-
         public EventoService(IGeralPersist geralPersist, IEventoPersist eventoPersist)
         {
 
